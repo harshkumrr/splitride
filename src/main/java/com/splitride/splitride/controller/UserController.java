@@ -25,4 +25,11 @@ public class UserController {
         return Map.of("token", token);
     }
 
+    @GetMapping("/me")
+    public String getCurrentUser() {
+        String email = org.springframework.security.core.context.SecurityContextHolder
+                .getContext().getAuthentication().getName();
+        return "You are logged in as: " + email;
+    }
+
 }

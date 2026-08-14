@@ -5,3 +5,6 @@ Content-Type: application/json
   "email": "harsh@test.com",
   "password": "test123"
 }
+###
+GET http://localhost:8080/api/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYXJzaEB0ZXN0LmNvbSIsImlhdCI6MTc4NjY3OTA3MiwiZXhwIjoxNzg2NzY1NDcyfQ.ytZxMxzPpP1AVQsXXRevP8Z1G61aDkG4cbx7zkrHXZg
