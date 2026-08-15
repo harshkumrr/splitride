@@ -7,13 +7,11 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/api/rides/request
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYXJzaEB0ZXN0LmNvbSIsImlhdCI6MTc4Njc3MTI0MywiZXhwIjoxNzg2ODU3NjQzfQ.9METkhL3Z1LNJceXeu3FeCadg7oMsCKihJ0VF9Wg3sw
+
+POST http://localhost:8080/api/rides/4/finalize
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYXJzaEB0ZXN0LmNvbSIsImlhdCI6MTc4Njc5Mjk2MywiZXhwIjoxNzg2ODc5MzYzfQ.AP6E3bgaFY_KnBA_F07Fz-oTbZ5QhJmoNnM23awL3HU
 Content-Type: application/json
 
 {
-  "origin": "Sector 62 Market",
-  "originLat": 28.6280,
-  "originLng": 77.3715,
-  "destination": "Pari Chowk"
+  "totalFare": "200"
 }

@@ -18,7 +18,7 @@ public class GroupMemberServiceImpl implements GroupMemberService {
     private UserRepository userRepository;
 
     @Override
-    public GroupMember joinGroup(RideGroup group, String userEmail, String dropPoint) {
+    public GroupMember joinGroup(RideGroup group, String userEmail, String dropPoint, Double dropLat, Double dropLng) {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -26,6 +26,8 @@ public class GroupMemberServiceImpl implements GroupMemberService {
         member.setUser(user);
         member.setGroup(group);
         member.setDropPoint(dropPoint);
+        member.setDropLat(dropLat);
+        member.setDropLng(dropLng);
 
         return groupMemberRepository.save(member);
     }

@@ -22,7 +22,7 @@ public class RideGroupServiceImpl implements RideGroupService {
     private static final int MAX_TIME_WINDOW_MINUTES = 20;
 
     @Override
-    public RideGroup createRideRequest(String userEmail, String origin, Double originLat, Double originLng, String destination) {
+    public RideGroup createRideRequest(String userEmail, String origin, Double originLat, Double originLng, String destination, Double destLat, Double destLng) {
         List<RideGroup> existingGroups = rideGroupRepository.findByDestination(destination);
 
         RideGroup group = null;
@@ -55,13 +55,13 @@ public class RideGroupServiceImpl implements RideGroupService {
             group = rideGroupRepository.save(group);
         }
 
-        groupMemberService.joinGroup(group, userEmail, destination);
+        groupMemberService.joinGroup(group, userEmail, destination, destLat, destLng);
 
         return group;
     }
 
     private double calculateDistanceKm(double lat1, double lng1, double lat2, double lng2) {
-        final int R = 6371; // Earth's radius in km
+        final int R = 6371;
         double latDistance = Math.toRadians(lat2 - lat1);
         double lngDistance = Math.toRadians(lng2 - lng1);
         double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)

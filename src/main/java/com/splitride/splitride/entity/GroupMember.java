@@ -29,6 +29,12 @@ public class GroupMember {
     @Column(name = "drop_point")
     private String dropPoint;
 
+    @Column(name = "drop_lat")
+    private Double dropLat;
+
+    @Column(name = "drop_lng")
+    private Double dropLng;
+
     @Column(name = "fare_share")
     private BigDecimal fareShare;
 

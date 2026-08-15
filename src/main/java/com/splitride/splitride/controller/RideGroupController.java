@@ -31,8 +31,10 @@ public class RideGroupController {
         String destination = (String) request.get("destination");
         Double originLat = request.get("originLat") != null ? Double.valueOf(request.get("originLat").toString()) : null;
         Double originLng = request.get("originLng") != null ? Double.valueOf(request.get("originLng").toString()) : null;
+        Double destLat = request.get("destLat") != null ? Double.valueOf(request.get("destLat").toString()) : null;
+        Double destLng = request.get("destLng") != null ? Double.valueOf(request.get("destLng").toString()) : null;
 
-        return rideGroupService.createRideRequest(userEmail, origin, originLat, originLng, destination);
+        return rideGroupService.createRideRequest(userEmail, origin, originLat, originLng, destination, destLat, destLng);
     }
 
     @PostMapping("/{groupId}/finalize")

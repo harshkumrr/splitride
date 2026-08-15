@@ -5,6 +5,6 @@ import com.splitride.splitride.entity.RideGroup;
 
 public interface GroupMemberService {
 
-    GroupMember joinGroup(RideGroup group, String userEmail, String dropPoint);
+    GroupMember joinGroup(RideGroup group, String userEmail, String dropPoint, Double dropLat, Double dropLng);
 
 }
