@@ -21,6 +21,12 @@ public class RideGroup {
     @Column(nullable = false)
     private String origin;
 
+    @Column(name = "origin_lat")
+    private Double originLat;
+
+    @Column(name = "origin_lng")
+    private Double originLng;
+
     @Column(nullable = false)
     private String destination;
 

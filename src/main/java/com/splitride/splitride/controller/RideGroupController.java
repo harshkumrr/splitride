@@ -25,12 +25,14 @@ public class RideGroupController {
     private RideGroupRepository rideGroupRepository;
 
     @PostMapping("/request")
-    public RideGroup requestRide(@RequestBody Map<String, String> request) {
+    public RideGroup requestRide(@RequestBody Map<String, Object> request) {
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        String origin = request.get("origin");
-        String destination = request.get("destination");
+        String origin = (String) request.get("origin");
+        String destination = (String) request.get("destination");
+        Double originLat = request.get("originLat") != null ? Double.valueOf(request.get("originLat").toString()) : null;
+        Double originLng = request.get("originLng") != null ? Double.valueOf(request.get("originLng").toString()) : null;
 
-        return rideGroupService.createRideRequest(userEmail, origin, destination);
+        return rideGroupService.createRideRequest(userEmail, origin, originLat, originLng, destination);
     }
 
     @PostMapping("/{groupId}/finalize")

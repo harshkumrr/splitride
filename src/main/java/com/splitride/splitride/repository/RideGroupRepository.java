@@ -12,4 +12,6 @@ public interface RideGroupRepository extends JpaRepository<RideGroup, Long> {
 
     List<RideGroup> findByOriginAndDestination(String origin, String destination);
 
+    List<RideGroup> findByDestination(String destination);
+
 }
