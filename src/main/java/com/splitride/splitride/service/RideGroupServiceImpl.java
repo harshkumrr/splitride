@@ -15,23 +15,34 @@ public class RideGroupServiceImpl implements RideGroupService {
     @Autowired
     private RideGroupRepository rideGroupRepository;
 
+    @Autowired
+    private GroupMemberService groupMemberService;
+
     @Override
     public RideGroup createRideRequest(String userEmail, String origin, String destination) {
         List<RideGroup> existingGroups = rideGroupRepository.findByOriginAndDestination(origin, destination);
 
-        for (RideGroup group : existingGroups) {
-            if (group.getStatus() == GroupStatus.FORMING) {
-                return group;
+        RideGroup group = null;
+
+        for (RideGroup g : existingGroups) {
+            if (g.getStatus() == GroupStatus.FORMING) {
+                group = g;
+                break;
             }
         }
 
-        RideGroup newGroup = new RideGroup();
-        newGroup.setOrigin(origin);
-        newGroup.setDestination(destination);
-        newGroup.setDepartureTime(LocalDateTime.now().plusMinutes(30));
-        newGroup.setStatus(GroupStatus.FORMING);
+        if (group == null) {
+            group = new RideGroup();
+            group.setOrigin(origin);
+            group.setDestination(destination);
+            group.setDepartureTime(LocalDateTime.now().plusMinutes(30));
+            group.setStatus(GroupStatus.FORMING);
+            group = rideGroupRepository.save(group);
+        }
 
-        return rideGroupRepository.save(newGroup);
+        groupMemberService.joinGroup(group, userEmail, destination);
+
+        return group;
     }
 
 }
