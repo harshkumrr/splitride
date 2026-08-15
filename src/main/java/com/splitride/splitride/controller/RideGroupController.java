@@ -1,11 +1,14 @@
 package com.splitride.splitride.controller;
 
 import com.splitride.splitride.entity.RideGroup;
+import com.splitride.splitride.repository.RideGroupRepository;
 import com.splitride.splitride.service.RideGroupService;
+import com.splitride.splitride.service.SettlementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 @RestController
@@ -15,6 +18,12 @@ public class RideGroupController {
     @Autowired
     private RideGroupService rideGroupService;
 
+    @Autowired
+    private SettlementService settlementService;
+
+    @Autowired
+    private RideGroupRepository rideGroupRepository;
+
     @PostMapping("/request")
     public RideGroup requestRide(@RequestBody Map<String, String> request) {
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -22,6 +31,20 @@ public class RideGroupController {
         String destination = request.get("destination");
 
         return rideGroupService.createRideRequest(userEmail, origin, destination);
+    }
+
+    @PostMapping("/{groupId}/finalize")
+    public String finalizeGroup(@PathVariable Long groupId, @RequestBody Map<String, String> request) {
+        RideGroup group = rideGroupRepository.findById(groupId)
+                .orElseThrow(() -> new RuntimeException("Group not found"));
+
+        BigDecimal totalFare = new BigDecimal(request.get("totalFare"));
+        settlementService.splitFare(group, totalFare);
+
+        group.setTotalFare(totalFare);
+        rideGroupRepository.save(group);
+
+        return "Fare split successfully among group members";
     }
 
 }

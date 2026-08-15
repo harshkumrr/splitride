@@ -7,11 +7,10 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/api/rides/request
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYXJzaEB0ZXN0LmNvbSIsImlhdCI6MTc4Njc2ODgwMCwiZXhwIjoxNzg2ODU1MjAwfQ.kv5ImQfBcEWyI4Y6OfpdT6Hdy0oueqDx7cr3tqQS7aM
+POST http://localhost:8080/api/rides/2/finalize
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYXJzaEB0ZXN0LmNvbSIsImlhdCI6MTc4Njc2OTY2NCwiZXhwIjoxNzg2ODU2MDY0fQ.X_48mTr4_ADqCuZ-1gR2B6d16BEEP1Vu_nI9Ss5nn1I
 Content-Type: application/json
 
 {
-  "origin": "Sector 18",
-  "destination": "Botanical Garden"
+  "totalFare": "150"
 }
