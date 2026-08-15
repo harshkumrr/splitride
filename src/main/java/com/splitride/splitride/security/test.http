@@ -5,6 +5,14 @@ Content-Type: application/json
   "email": "harsh@test.com",
   "password": "test123"
 }
+
 ###
-GET http://localhost:8080/api/users/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYXJzaEB0ZXN0LmNvbSIsImlhdCI6MTc4NjY3OTA3MiwiZXhwIjoxNzg2NzY1NDcyfQ.ytZxMxzPpP1AVQsXXRevP8Z1G61aDkG4cbx7zkrHXZg
+
+POST http://localhost:8080/api/rides/request
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYXJzaEB0ZXN0LmNvbSIsImlhdCI6MTc4Njc2NzQ1OCwiZXhwIjoxNzg2ODUzODU4fQ.ONRtqZBbZgm2bhjsRN0GGPOeFScSIh7fflkK-NvUBcY
+Content-Type: application/json
+
+{
+  "origin": "Noida Sector 62",
+  "destination": "Pari Chowk"
+}
