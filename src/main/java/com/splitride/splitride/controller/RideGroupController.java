@@ -4,6 +4,7 @@ import com.splitride.splitride.entity.RideGroup;
 import com.splitride.splitride.repository.RideGroupRepository;
 import com.splitride.splitride.service.RideGroupService;
 import com.splitride.splitride.service.SettlementService;
+import com.splitride.splitride.service.SummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,9 @@ public class RideGroupController {
 
     @Autowired
     private SettlementService settlementService;
+
+    @Autowired
+    private SummaryService summaryService;
 
     @Autowired
     private RideGroupRepository rideGroupRepository;
@@ -48,7 +52,7 @@ public class RideGroupController {
         group.setTotalFare(totalFare);
         rideGroupRepository.save(group);
 
-        return "Fare split successfully among group members";
+        return summaryService.generateSummary(group);
     }
 
 }
