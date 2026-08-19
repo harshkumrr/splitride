@@ -32,6 +32,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:3000",
+                "https://splitride-sandy.vercel.app",
                 "https://splitride-o4phuttp8-harsh-37bc.vercel.app"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
