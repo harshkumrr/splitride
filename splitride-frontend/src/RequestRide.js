@@ -18,7 +18,7 @@ function RecenterMap({ lat, lng }) {
     return null;
 }
 
-function RequestRide() {
+function RequestRide({ onRideRequested }) {
     const [origin, setOrigin] = useState('Detecting your location...');
     const [originLat, setOriginLat] = useState(null);
     const [originLng, setOriginLng] = useState(null);
@@ -103,6 +103,7 @@ function RequestRide() {
             if (response.ok) {
                 setResult(data);
                 setMessage('');
+                if (onRideRequested) onRideRequested(data.id);
             } else {
                 setMessage('Something went wrong. Please try again.');
             }

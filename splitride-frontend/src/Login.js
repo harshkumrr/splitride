@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function Login({ onLoginSuccess }) {
     const [isLoginMode, setIsLoginMode] = useState(true);
     const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -17,7 +18,7 @@ function Login({ onLoginSuccess }) {
             ? 'http://localhost:8080/api/users/login'
             : 'http://localhost:8080/api/users/register';
 
-        const body = isLoginMode ? { email, password } : { name, email, password };
+        const body = isLoginMode ? { email, password } : { name, phone, email, password };
 
         try {
             const response = await fetch(url, {
@@ -74,14 +75,24 @@ function Login({ onLoginSuccess }) {
 
             <form onSubmit={handleSubmit}>
                 {!isLoginMode && (
-                    <input
-                        type="text"
-                        placeholder="Full name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        style={inputStyle}
-                        required
-                    />
+                    <>
+                        <input
+                            type="text"
+                            placeholder="Full name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            style={inputStyle}
+                            required
+                        />
+                        <input
+                            type="tel"
+                            placeholder="Phone number"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            style={inputStyle}
+                            required
+                        />
+                    </>
                 )}
                 <input
                     type="email"
