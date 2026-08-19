@@ -22,14 +22,16 @@ public class GroupMemberServiceImpl implements GroupMemberService {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        GroupMember member = new GroupMember();
-        member.setUser(user);
-        member.setGroup(group);
-        member.setDropPoint(dropPoint);
-        member.setDropLat(dropLat);
-        member.setDropLng(dropLng);
-
-        return groupMemberRepository.save(member);
+        return groupMemberRepository.findByGroupIdAndUserId(group.getId(), user.getId())
+                .orElseGet(() -> {
+                    GroupMember member = new GroupMember();
+                    member.setUser(user);
+                    member.setGroup(group);
+                    member.setDropPoint(dropPoint);
+                    member.setDropLat(dropLat);
+                    member.setDropLng(dropLng);
+                    return groupMemberRepository.save(member);
+                });
     }
 
 }

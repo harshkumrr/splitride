@@ -1,28 +1,9 @@
-POST http://localhost:8080/api/users/login
+POST https://splitride-backend.onrender.com/api/users/register
 Content-Type: application/json
 
 {
-  "email": "harsh@test.com",
-  "password": "test123"
-}
-###
-POST http://localhost:8080/api/rides/request
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYXJzaEB0ZXN0LmNvbSIsImlhdCI6MTc4Njg2NTIzNCwiZXhwIjoxNzg2OTUxNjM0fQ.b349kjKCQwtTmetOriE_bhmJkWll1YXA-nT--YUAorU
-Content-Type: application/json
-
-{
-  "origin": "Sector 62",
-  "originLat": 28.6274,
-  "originLng": 77.3708,
-  "destination": "Pari Chowk",
-  "destLat": 28.4744,
-  "destLng": 77.5040
-}
-###
-POST http://localhost:8080/api/rides/7/finalize
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYXJzaEB0ZXN0LmNvbSIsImlhdCI6MTc4Njg2NTIzNCwiZXhwIjoxNzg2OTUxNjM0fQ.b349kjKCQwtTmetOriE_bhmJkWll1YXA-nT--YUAorU
-Content-Type: application/json
-
-{
-  "totalFare": "200"
+  "name": "Live Test",
+  "email": "livetest@example.com",
+  "password": "test1234",
+  "phone": "8888888888"
 }

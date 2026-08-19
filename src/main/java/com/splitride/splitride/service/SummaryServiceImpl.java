@@ -36,7 +36,8 @@ public class SummaryServiceImpl implements SummaryService {
         String prompt = String.format(
                 "Write a short, friendly 2-3 sentence trip confirmation summary for a ride-sharing app. " +
                         "Trip: from %s to %s, departing at %s, total fare ₹%s. Members:\n%s" +
-                        "Keep it warm and concise, like a confirmation message a user would actually enjoy reading.",
+                        "Keep it warm and concise, like a confirmation message a user would actually enjoy reading. " +
+                        "Respond in plain text only — do not use markdown, asterisks, or any special formatting.",
                 group.getOrigin(), group.getDestination(), group.getDepartureTime(),
                 group.getTotalFare(), memberInfo.toString()
         );
@@ -44,7 +45,7 @@ public class SummaryServiceImpl implements SummaryService {
         String url = "https://api.groq.com/openai/v1/chat/completions";
 
         Map<String, Object> requestBody = Map.of(
-                "model", "llama-3.3-70b-versatile",
+                "model", "openai/gpt-oss-20b",
                 "messages", List.of(
                         Map.of("role", "user", "content", prompt)
                 )

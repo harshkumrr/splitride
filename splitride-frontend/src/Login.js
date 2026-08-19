@@ -15,8 +15,8 @@ function Login({ onLoginSuccess }) {
         setLoading(true);
 
         const url = isLoginMode
-            ? 'http://localhost:8080/api/users/login'
-            : 'http://localhost:8080/api/users/register';
+            ? `${process.env.REACT_APP_API_URL}/api/users/login`
+            : `${process.env.REACT_APP_API_URL}/api/users/register`;
 
         const body = isLoginMode ? { email, password } : { name, phone, email, password };
 

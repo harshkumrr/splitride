@@ -1,6 +1,9 @@
 package com.splitride.splitride.controller;
 
+import com.splitride.splitride.entity.GroupMember;
+import com.splitride.splitride.entity.GroupStatus;
 import com.splitride.splitride.entity.RideGroup;
+import com.splitride.splitride.repository.GroupMemberRepository;
 import com.splitride.splitride.repository.RideGroupRepository;
 import com.splitride.splitride.service.RideGroupService;
 import com.splitride.splitride.service.SettlementService;
@@ -10,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,6 +31,9 @@ public class RideGroupController {
 
     @Autowired
     private RideGroupRepository rideGroupRepository;
+
+    @Autowired
+    private GroupMemberRepository groupMemberRepository;
 
     @PostMapping("/request")
     public RideGroup requestRide(@RequestBody Map<String, Object> request) {
@@ -50,9 +57,32 @@ public class RideGroupController {
         settlementService.splitFare(group, totalFare);
 
         group.setTotalFare(totalFare);
+        group.setStatus(GroupStatus.CONFIRMED);
         rideGroupRepository.save(group);
 
         return summaryService.generateSummary(group);
+    }
+
+    @PostMapping("/{groupId}/cancel")
+    public RideGroup cancelGroup(@PathVariable Long groupId) {
+        RideGroup group = rideGroupRepository.findById(groupId)
+                .orElseThrow(() -> new RuntimeException("Group not found"));
+
+        group.setStatus(GroupStatus.CANCELLED);
+        return rideGroupRepository.save(group);
+    }
+
+    @GetMapping("/{groupId}")
+    public Map<String, Object> getGroupDetails(@PathVariable Long groupId) {
+        RideGroup group = rideGroupRepository.findById(groupId)
+                .orElseThrow(() -> new RuntimeException("Group not found"));
+
+        List<GroupMember> members = groupMemberRepository.findByGroupId(groupId);
+
+        return Map.of(
+                "group", group,
+                "members", members
+        );
     }
 
 }

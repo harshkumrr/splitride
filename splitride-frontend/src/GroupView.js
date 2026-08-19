@@ -15,7 +15,7 @@ function GroupView({ groupId }) {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await fetch(`http://localhost:8080/api/rides/${groupId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/rides/${groupId}`, {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
 
@@ -64,7 +64,7 @@ function GroupView({ groupId }) {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await fetch(`http://localhost:8080/api/rides/${groupId}/finalize`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/rides/${groupId}/finalize`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ function GroupView({ groupId }) {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await fetch(`http://localhost:8080/api/rides/${groupId}/cancel`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/rides/${groupId}/cancel`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
             });
